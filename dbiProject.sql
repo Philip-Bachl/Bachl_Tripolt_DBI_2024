@@ -1,7 +1,8 @@
 
 CREATE OR REPLACE PACKAGE Mitarbeiter_Package AS
   PROCEDURE ErhoeheGehalt(gehaltsgrenze NUMBER, erhoehung NUMBER);
-  FUNCTION Durchschnittsgehalt();
+  FUNCTION Durchschnittsgehalt RETURN NUMBER;
+  FUNCTION BerechneNeuesGehalt(altesGehalt NUMBER, erhoehung NUMBER) RETURN NUMBER;
 END Mitarbeiter_Package;
 /
 
