@@ -1,124 +1,114 @@
--- Insert data into "Filiale"
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (1, 'Filiale A', 'Adresse A', NULL);
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (2, 'Filiale B', 'Adresse B', NULL);
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (3, 'Filiale C', 'Adresse C', NULL);
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (4, 'Filiale D', 'Adresse D', NULL);
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (5, 'Filiale E', 'Adresse E', NULL);
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (6, 'Filiale F', 'Adresse F', NULL);
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (7, 'Filiale G', 'Adresse G', NULL);
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (8, 'Filiale H', 'Adresse H', NULL);
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (9, 'Filiale I', 'Adresse I', NULL);
-INSERT INTO Filiale (Id, Name, Adresse, Manager_Id) VALUES (10, 'Filiale J', 'Adresse J', NULL);
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (1, 'Germany', 'Deutschland');
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (2, 'France', 'France');
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (3, 'Italy', 'Italia');
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (4, 'Spain', 'España');
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (5, 'USA', 'United States');
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (6, 'Canada', 'Canada');
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (7, 'UK', 'United Kingdom');
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (8, 'Australia', 'Australia');
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (9, 'Japan', '日本');
+INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (10, 'China', '中国');
 
--- Insert data into "Mitarbeiter"
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (1, 'Max', 'Mustermann', 3000, 1);
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (2, 'Erika', 'Musterfrau', 3200, 2);
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (3, 'John', 'Doe', 3100, 3);
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (4, 'Jane', 'Doe', 3300, 4);
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (5, 'Alice', 'Smith', 3400, 5);
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (6, 'Bob', 'Johnson', 3500, 6);
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (7, 'Charlie', 'Brown', 3600, 7);
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (8, 'David', 'Wilson', 3700, 8);
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (9, 'Eva', 'Davis', 3800, 9);
-INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (10, 'Frank', 'Martinez', 3900, 10);
+INSERT INTO Ort (PLZ, Ort) VALUES (10115, 'Berlin');
+INSERT INTO Ort (PLZ, Ort) VALUES (75001, 'Paris');
+INSERT INTO Ort (PLZ, Ort) VALUES (00184, 'Rome');
+INSERT INTO Ort (PLZ, Ort) VALUES (28001, 'Madrid');
+INSERT INTO Ort (PLZ, Ort) VALUES (10001, 'New York');
+INSERT INTO Ort (PLZ, Ort) VALUES (10111, 'Toronto');
+INSERT INTO Ort (PLZ, Ort) VALUES (10112, 'London');
+INSERT INTO Ort (PLZ, Ort) VALUES (2000, 'Sydney');
+INSERT INTO Ort (PLZ, Ort) VALUES (100-0001, 'Tokyo');
+INSERT INTO Ort (PLZ, Ort) VALUES (100000, 'Beijing');
 
--- Insert data into "Futter"
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter A', 2.50);
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter B', 3.00);
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter C', 1.75);
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter D', 2.80);
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter E', 3.20);
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter F', 1.90);
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter G', 2.60);
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter H', 3.10);
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter I', 1.80);
-INSERT INTO Futter (Name, Preis_kg) VALUES ('Futter J', 2.70);
 
--- Insert data into "Art"
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (1, 'Art A', 'Beschreibung A');
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (2, 'Art B', 'Beschreibung B');
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (3, 'Art C', 'Beschreibung C');
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (4, 'Art D', 'Beschreibung D');
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (5, 'Art E', 'Beschreibung E');
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (6, 'Art F', 'Beschreibung F');
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (7, 'Art G', 'Beschreibung G');
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (8, 'Art H', 'Beschreibung H');
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (9, 'Art I', 'Beschreibung I');
-INSERT INTO Art (Id, Name, Beschreibung) VALUES (10, 'Art J', 'Beschreibung J');
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (1, 'John', 'Doe', 50000, 1);
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (2, 'Jane', 'Smith', 55000, 2);
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (3, 'Alice', 'Johnson', 60000, 3);
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (4, 'Bob', 'Brown', 45000, 4);
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (5, 'Charlie', 'Davis', 70000, 5);
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (6, 'David', 'Wilson', 48000, 6);
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (7, 'Eve', 'Moore', 52000, 7);
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (8, 'Frank', 'Taylor', 53000, 8);
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (9, 'Grace', 'Anderson', 59000, 9);
+INSERT INTO Mitarbeiter (Id, Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES (10, 'Hank', 'Thomas', 62000, 10);
 
--- Insert data into "Tier"
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier A', 'Futter A', 50, 5.5, 1);
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier B', 'Futter B', 60, 6.0, 2);
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier C', 'Futter C', 70, 7.0, 3);
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier D', 'Futter D', 80, 8.0, 4);
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier E', 'Futter E', 90, 9.0, 5);
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier F', 'Futter F', 100, 10.0, 6);
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier G', 'Futter G', 110, 11.0, 7);
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier H', 'Futter H', 120, 12.0, 8);
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier I', 'Futter I', 130, 13.0, 9);
-INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Tier J', 'Futter J', 140, 14.0, 10);
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (1, 'Mammal', 'Warm-blooded animal');
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (2, 'Bird', 'Feathered animal');
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (3, 'Reptile', 'Cold-blooded animal');
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (4, 'Fish', 'Aquatic animal');
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (5, 'Amphibian', 'Lives both in water and on land');
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (6, 'Insect', 'Small invertebrate animal');
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (7, 'Arachnid', 'Eight-legged animal');
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (8, 'Crustacean', 'Aquatic arthropod');
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (9, 'Mollusk', 'Soft-bodied animal');
+INSERT INTO Art (Id, Name, Beschreibung) VALUES (10, 'Annelid', 'Segmented worm');
 
--- Insert data into "Tier_ist_in_Filiale"
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (1, 'Tier A', 5);
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (2, 'Tier B', 6);
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (3, 'Tier C', 7);
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (4, 'Tier D', 8);
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (5, 'Tier E', 9);
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (6, 'Tier F', 10);
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (7, 'Tier G', 11);
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (8, 'Tier H', 12);
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (9, 'Tier I', 13);
-INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (10, 'Tier J', 14);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Dog Food', 3.5);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Cat Food', 4.0);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Bird Seed', 2.0);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Fish Flakes', 5.0);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Reptile Pellets', 6.0);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Insect Feed', 1.5);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Rabbit Food', 3.0);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Horse Feed', 7.0);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Pig Feed', 2.5);
+INSERT INTO Futter (Name, Preis_kg) VALUES ('Sheep Feed', 3.2);
 
--- Insert data into "Filiale_hat_Futter"
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (1, 'Futter A', 1000);
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (2, 'Futter B', 2000);
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (3, 'Futter C', 3000);
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (4, 'Futter D', 4000);
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (5, 'Futter E', 5000);
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (6, 'Futter F', 6000);
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (7, 'Futter G', 7000);
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (8, 'Futter H', 8000);
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (9, 'Futter I', 9000);
-INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (10, 'Futter J', 10000);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Dog', 'Dog Food', 60, 25.0, 1);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Cat', 'Cat Food', 30, 5.0, 1);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Parrot', 'Bird Seed', 25, 0.5, 2);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Goldfish', 'Fish Flakes', 10, 0.1, 4);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Iguana', 'Reptile Pellets', 100, 5.0, 3);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Rabbit', 'Rabbit Food', 40, 2.0, 1);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Horse', 'Horse Feed', 150, 500.0, 1);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Pig', 'Pig Feed', 100, 200.0, 1);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Sheep', 'Sheep Feed', 90, 70.0, 1);
+INSERT INTO Tier (Name, Futter_Name, Groesse_cm, Gewicht_kg, Art_Art_Id) VALUES ('Spider', 'Insect Feed', 5, 0.02, 7);
 
--- Insert data into "Staat"
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (1, 'Staat A', 'Bezeichnung A');
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (2, 'Staat B', 'Bezeichnung B');
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (3, 'Staat C', 'Bezeichnung C');
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (4, 'Staat D', 'Bezeichnung D');
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (5, 'Staat E', 'Bezeichnung E');
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (6, 'Staat F', 'Bezeichnung F');
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (7, 'Staat G', 'Bezeichnung G');
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (8, 'Staat H', 'Bezeichnung H');
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (9, 'Staat I', 'Bezeichnung I');
-INSERT INTO Staat (Id, Name, Bezeichnung) VALUES (10, 'Staat J', 'Bezeichnung J');
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (1, 'Berlin Branch', 1, 'Alexanderplatz 1', 10115, 'Berlin', 1);
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (2, 'Paris Branch', 2, 'Champs-Élysées 2', 75001, 'Paris', 2);
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (3, 'Rome Branch', 3, 'Via del Corso 3', 00184, 'Rome', 3);
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (4, 'Madrid Branch', 4, 'Gran Vía 4', 28001, 'Madrid', 4);
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (5, 'New York Branch', 5, '5th Avenue 5', 10001, 'New York', 5);
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (6, 'Toronto Branch', 6, 'Bay Street 6', 10111, 'Toronto', 6);
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (7, 'London Branch', 7, 'Oxford Street 7', 10112, 'London', 7);
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (8, 'Sydney Branch', 8, 'George Street 8', 2000, 'Sydney', 8);
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (9, 'Tokyo Branch', 9, 'Shibuya 9', 100-0001, 'Tokyo', 9);
+INSERT INTO Filiale (Id, Name, Manager_Id, StraßeUndHausnummer, Ort_PLZ, Ort_Ort, Staat_Id) VALUES (10, 'Beijing Branch', 10, 'Wangfujing 10', 100000, 'Beijing', 10);
 
--- Insert data into "Ort"
-INSERT INTO Ort (PLZ, Ort) VALUES (1010, 'Ort A');
-INSERT INTO Ort (PLZ, Ort) VALUES (1020, 'Ort B');
-INSERT INTO Ort (PLZ, Ort) VALUES (1030, 'Ort C');
-INSERT INTO Ort (PLZ, Ort) VALUES (1040, 'Ort D');
-INSERT INTO Ort (PLZ, Ort) VALUES (1050, 'Ort E');
-INSERT INTO Ort (PLZ, Ort) VALUES (1060, 'Ort F');
-INSERT INTO Ort (PLZ, Ort) VALUES (1070, 'Ort G');
-INSERT INTO Ort (PLZ, Ort) VALUES (1080, 'Ort H');
-INSERT INTO Ort (PLZ, Ort) VALUES (1090, 'Ort I');
-INSERT INTO Ort (PLZ, Ort) VALUES (1100, 'Ort J');
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (1, 'Dog', 10);
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (2, 'Cat', 15);
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (3, 'Parrot', 5);
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (4, 'Goldfish', 20);
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (5, 'Iguana', 3);
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (6, 'Rabbit', 8);
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (7, 'Horse', 2);
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (8, 'Pig', 4);
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (9, 'Sheep', 6);
+INSERT INTO Tier_ist_in_Filiale (Filiale_Id, Tier_Name, Anzahl) VALUES (10, 'Spider', 12);
 
--- Insert data into "Kunde"
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (1, 'Kunde A', 'Nachname A', '123456789', 'kundeA@example.com', 'Strasse 1', 1, 1010, 'Ort A');
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (2, 'Kunde B', 'Nachname B', '234567890', 'kundeB@example.com', 'Strasse 2', 2, 1020, 'Ort B');
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (3, 'Kunde C', 'Nachname C', '345678901', 'kundeC@example.com', 'Strasse 3', 3, 1030, 'Ort C');
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (4, 'Kunde D', 'Nachname D', '456789012', 'kundeD@example.com', 'Strasse 4', 4, 1040, 'Ort D');
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (5, 'Kunde E', 'Nachname E', '567890123', 'kundeE@example.com', 'Strasse 5', 5, 1050, 'Ort E');
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (6, 'Kunde F', 'Nachname F', '678901234', 'kundeF@example.com', 'Strasse 6', 6, 1060, 'Ort F');
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (7, 'Kunde G', 'Nachname G', '789012345', 'kundeG@example.com', 'Strasse 7', 7, 1070, 'Ort G');
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (8, 'Kunde H', 'Nachname H', '890123456', 'kundeH@example.com', 'Strasse 8', 8, 1080, 'Ort H');
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (9, 'Kunde I', 'Nachname I', '901234567', 'kundeI@example.com', 'Strasse 9', 9, 1090, 'Ort I');
-INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (10, 'Kunde J', 'Nachname J', '012345678', 'kundeJ@example.com', 'Strasse 10', 10, 1100, 'Ort J');
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (1, 'Dog Food', 10000);
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (2, 'Cat Food', 8000);
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (3, 'Bird Seed', 5000);
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (4, 'Fish Flakes', 2000);
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (5, 'Reptile Pellets', 3000);
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (6, 'Insect Feed', 1500);
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (7, 'Rabbit Food', 4000);
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (8, 'Horse Feed', 7000);
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (9, 'Pig Feed', 6000);
+INSERT INTO Filiale_hat_Futter (Filiale_Id, Futter_Name, Gewicht_Gramm) VALUES (10, 'Sheep Feed', 5000);
 
--- Insert data into "Bestellung"
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (1, 'Max', 'Mustermann', '1234567890', 'max@example.com', 'Musterstraße 1', 1, 10115, 'Berlin');
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (2, 'Marie', 'Curie', '0987654321', 'marie@example.com', 'Curie Street 2', 2, 75001, 'Paris');
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (3, 'Leonardo', 'da Vinci', '1122334455', 'leo@example.com', 'Vinci Road 3', 3, 00184, 'Rome');
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (4, 'Miguel', 'de Cervantes', '2233445566', 'miguel@example.com', 'Cervantes Avenue 4', 4, 28001, 'Madrid');
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (5, 'John', 'Doe', '3344556677', 'john@example.com', 'Doe Street 5', 5, 10001, 'New York');
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (6, 'Jane', 'Smith', '4455667788', 'jane@example.com', 'Smith Road 6', 6, 10111, 'Toronto');
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (7, 'William', 'Shakespeare', '5566778899', 'william@example.com', 'Shakespeare Lane 7', 7, 10112, 'London');
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (8, 'Ned', 'Kelly', '6677889900', 'ned@example.com', 'Kelly Street 8', 8, 2000, 'Sydney');
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (9, 'Hiroshi', 'Tanaka', '7788990011', 'hiroshi@example.com', 'Tanaka Road 9', 9, 100-0001, 'Tokyo');
+INSERT INTO Kunde (Id, Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort) VALUES (10, 'Li', 'Wei', '8899001122', 'li@example.com', 'Wei Street 10', 10, 100000, 'Beijing');
+
 INSERT INTO Bestellung (Id, Kunde_Id, Filiale_Id) VALUES (1, 1, 1);
 INSERT INTO Bestellung (Id, Kunde_Id, Filiale_Id) VALUES (2, 2, 2);
 INSERT INTO Bestellung (Id, Kunde_Id, Filiale_Id) VALUES (3, 3, 3);
@@ -130,26 +120,13 @@ INSERT INTO Bestellung (Id, Kunde_Id, Filiale_Id) VALUES (8, 8, 8);
 INSERT INTO Bestellung (Id, Kunde_Id, Filiale_Id) VALUES (9, 9, 9);
 INSERT INTO Bestellung (Id, Kunde_Id, Filiale_Id) VALUES (10, 10, 10);
 
--- Insert data into "Bestellung_hat_Tier"
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (1, 'Tier A');
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (2, 'Tier B');
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (3, 'Tier C');
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (4, 'Tier D');
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (5, 'Tier E');
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (6, 'Tier F');
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (7, 'Tier G');
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (8, 'Tier H');
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (9, 'Tier I');
-INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (10, 'Tier J');
-
--- Insert data into "Bestellung_hat_Futter"
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (1, 'Futter A');
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (2, 'Futter B');
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (3, 'Futter C');
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (4, 'Futter D');
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (5, 'Futter E');
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (6, 'Futter F');
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (7, 'Futter G');
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (8, 'Futter H');
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (9, 'Futter I');
-INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (10, 'Futter J');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (1, 'Dog');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (2, 'Cat');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (3, 'Parrot');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (4, 'Goldfish');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (5, 'Iguana');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (6, 'Rabbit');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (7, 'Horse');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (8, 'Pig');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (9, 'Sheep');
+INSERT INTO Bestellung_hat_Tier (Bestellung_Id, Tier_Name) VALUES (10, 'Spider');
