@@ -3,35 +3,30 @@ CREATE OR REPLACE PACKAGE Mitarbeiter_Package AS
   PROCEDURE ErhoeheGehalt(gehaltsgrenze NUMBER, erhoehung NUMBER);
   FUNCTION Durchschnittsgehalt();
 END Mitarbeiter_Package;
-
+/
 
 CREATE OR REPLACE PACKAGE BODY Mitarbeiter_Package AS
-FUNCTION BerechneNeuesGehalt(altesGehalt NUMBER, erhoehung NUMBER) RETURN NUMBER IS
+
+  FUNCTION BerechneNeuesGehalt(altesGehalt NUMBER, erhoehung NUMBER) RETURN NUMBER IS
   BEGIN
     RETURN altesGehalt + erhoehung;
   END;
 
   PROCEDURE ErhoeheGehalt(gehaltsgrenze NUMBER, erhoehung NUMBER) IS
-		BEGIN
-		  UPDATE Mitarbeiter
-		  SET Gehalt = BerechneNeuesGehalt(Gehalt, erhoehung)
-		  WHERE Gehalt < gehaltsgrenze;
-		END;
-	
-	
-FUNCTION Durchschnittsgehalt RETURN NUMBER IS v_durchschnitt NUMBER;
 	BEGIN
-	  SELECT AVG(Gehalt) INTO v_durchschnitt FROM Mitarbeiter;
-	      return v_durchschnitt;
-	END Durchschnittsgehalt;
+    UPDATE Mitarbeiter
+    SET Gehalt = BerechneNeuesGehalt(Gehalt, erhoehung)
+    WHERE Gehalt < gehaltsgrenze;
+	END;
 	
-	
-	begin
-		DBMS_OUTPUT.PUT_LINE(Durchschnittsgehalt());
-	End;
+  FUNCTION Durchschnittsgehalt RETURN NUMBER IS v_durchschnitt NUMBER;
+    BEGIN
+      SELECT AVG(Gehalt) INTO v_durchschnitt FROM Mitarbeiter;
+          return v_durchschnitt;
+    END Durchschnittsgehalt;
 
 END Mitarbeiter_Package;
-
+/
 
 DECLARE
     gehalt number := 50000; 
