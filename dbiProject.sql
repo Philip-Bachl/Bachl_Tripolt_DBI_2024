@@ -1,17 +1,18 @@
 --
 CREATE OR REPLACE PACKAGE Mitarbeiter_Package AS
-  PROCEDURE ErhoeheGehalt(gehaltsgrenze NUMBER, erhoehung NUMBER);
-  FUNCTION Durchschnittsgehalt RETURN NUMBER;
+    PROCEDURE ErhoeheGehalt(gehaltsgrenze NUMBER, erhoehung NUMBER);
+    FUNCTION Durchschnittsgehalt RETURN NUMBER;
+    PROCEDURE MitarbeiterDieAuchKundenSind;
 END Mitarbeiter_Package;
 /
 
 CREATE OR REPLACE PACKAGE BODY Mitarbeiter_Package AS
-  FUNCTION BerechneNeuesGehalt(altesGehalt NUMBER, erhoehung NUMBER) RETURN NUMBER IS
-  BEGIN
-    RETURN altesGehalt + erhoehung;
-  END;
+    FUNCTION BerechneNeuesGehalt(altesGehalt NUMBER, erhoehung NUMBER) RETURN NUMBER IS
+    BEGIN
+        RETURN altesGehalt + erhoehung;
+    END;
 
-  PROCEDURE ErhoeheGehalt(gehaltsgrenze NUMBER, erhoehung NUMBER) IS
+    PROCEDURE ErhoeheGehalt(gehaltsgrenze NUMBER, erhoehung NUMBER) IS
  	  e_no_raise EXCEPTION;
 	BEGIN
     UPDATE Mitarbeiter
@@ -26,10 +27,30 @@ CREATE OR REPLACE PACKAGE BODY Mitarbeiter_Package AS
 		dbms_output.Put_line('Nobody got a raise');
 	END;
 	
-  FUNCTION Durchschnittsgehalt RETURN NUMBER IS v_durchschnitt NUMBER;
+    FUNCTION Durchschnittsgehalt RETURN NUMBER IS v_durchschnitt NUMBER;
     BEGIN
       SELECT AVG(Gehalt) INTO v_durchschnitt FROM Mitarbeiter;
           return v_durchschnitt;
+    END;
+
+    CREATE OR REPLACE PROCEDURE MitarbeiterDieAuchKundenSind
+    AS
+        CURSOR c_mitarbeiter IS SELECT * FROM MITARBEITER;
+        CURSOR c_kunden IS SELECT * FROM KUNDE;
+    BEGIN
+        FOR mit IN c_mitarbeiter
+        LOOP
+            FOR kun IN c_kunden
+            LOOP
+                IF mit.vorname = kun.vorname AND mit.nachname = kun.nachname THEN
+                    DBMS_OUTPUT.PUT_LINE(mit.vorname||' '||mit.nachname);
+                END IF;
+            END LOOP;
+        END LOOP;
+    END;
+
+    BEGIN
+        MitarbeiterDieAuchKundenSind();
     END;
 
 END Mitarbeiter_Package;
@@ -39,16 +60,16 @@ DECLARE
     gehalt number := 50000; 
     erhoehung number := 5000; 
 BEGIN
-  Mitarbeiter_Package.ErhoeheGehalt(gehalt, erhoehung);
-  Mitarbeiter_Package.Durchschnittsgehalt();
+    Mitarbeiter_Package.ErhoeheGehalt(gehalt, erhoehung);
+    Mitarbeiter_Package.Durchschnittsgehalt();
 END;
 
 
 
 
 CREATE OR REPLACE PACKAGE Filiale_Package AS
-  PROCEDURE GetFilialenMitTier(p_Tier_Name VARCHAR2);
-  Procedure GetMitarbeiterInFilialeWennGehaltGroesserAls (p_Filiale_Id IN NUMBER, p_Gehalt IN NUMBER)
+    PROCEDURE GetFilialenMitTier(p_Tier_Name VARCHAR2);
+    Procedure GetMitarbeiterInFilialeWennGehaltGroesserAls (p_Filiale_Id IN NUMBER, p_Gehalt IN NUMBER)
  END Filiale_Package;
 /
 
@@ -78,7 +99,6 @@ CREATE OR REPLACE PACKAGE BODY Filiale_Package AS
 	        DBMS_OUTPUT.PUT_LINE('Mitarbeiter ID: ' || mit.Id || ' Vorname: ' || mit.Vorname || ' Nachname: ' || mit.Nachname || ' Gehalt: ' || mit.Gehalt);
 	    END LOOP;
 	END;
-
 
 END Filiale_Package;
 /
