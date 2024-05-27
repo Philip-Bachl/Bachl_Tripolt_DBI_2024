@@ -129,3 +129,148 @@ BEGIN
     AddGratisBestellungZuKundenInGermany;
 END;
 
+CREATE OR REPLACE PACKAGE logging_package AS
+    PROCEDURE log_action(culprit VARCHAR2, changed_table VARCHAR);
+END logging_package;
+/
+
+CREATE OR REPLACE PACKAGE BODY logging_package AS
+    PROCEDURE log_action(culprit VARCHAR2, changed_table VARCHAR)
+    AS
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE(culprit||' changed table '||changed_table);
+    END;
+END logging_package;
+/
+
+CREATE OR replace TRIGGER log_ART_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON ART
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'ART');
+END;
+/
+
+CREATE OR replace TRIGGER log_BESTELLUNG_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON BESTELLUNG
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'BESTELLUNG');
+END;
+/
+CREATE OR replace TRIGGER log_BESTELLUNG_HAT_FUTTER_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON BESTELLUNG_HAT_FUTTER
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'BESTELLUNG_HAT_FUTTER');
+END;
+/
+CREATE OR replace TRIGGER log_BESTELLUNG_HAT_TIER_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON BESTELLUNG_HAT_TIER
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'BESTELLUNG_HAT_TIER');
+END;
+/
+CREATE OR replace TRIGGER log_FILIALE_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON FILIALE
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'FILIALE');
+END;
+/
+CREATE OR replace TRIGGER log_FILIALE_HAT_FUTTER_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON FILIALE_HAT_FUTTER
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'FILIALE_HAT_FUTTER');
+END;
+/
+CREATE OR replace TRIGGER log_FUTTER_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON FUTTER
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'FUTTER');
+END;
+/
+CREATE OR replace TRIGGER log_KUNDE_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON KUNDE
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'KUNDE');
+END;
+/
+CREATE OR replace TRIGGER log_MITARBEITER_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON MITARBEITER
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'MITARBEITER');
+END;
+/
+CREATE OR replace TRIGGER log_ORT_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON ORT
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'ORT');
+END;
+/
+CREATE OR replace TRIGGER log_STAAT_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON STAAT
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'STAAT');
+END;
+/
+CREATE OR replace TRIGGER log_TIER_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON TIER
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'TIER');
+END;
+/
+CREATE OR replace TRIGGER log_TIER_IST_IN_FILIALE_trigger
+BEFORE INSERT OR UPDATE OR DELETE ON TIER_IST_IN_FILIALE
+DECLARE
+    v_user VARCHAR2(30);
+BEGIN
+    SELECT USER INTO v_user FROM dual;
+
+    logging_package.log_action(v_user, 'TIER_IST_IN_FILIALE');
+END;
+/
