@@ -120,7 +120,7 @@ BEGIN
 
     FOR r IN (SELECT Id FROM Kunde WHERE Staat_Id = v_GermanyStateId) LOOP
         INSERT INTO Bestellung (Kunde_Id, Filiale_Id) VALUES (r.Id, 1);
-        SELECT COUNT(b.id) INTO v_BestellungCount FROM BESTELLUNG;
+        SELECT max(b.id) INTO v_BestellungCount FROM BESTELLUNG;
         INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (v_BestellungCount,v_FutterName);
     END LOOP;
     DBMS_OUTPUT.PUT_LINE('Gratis-Bestellungen wurden hinzugefügt.');
