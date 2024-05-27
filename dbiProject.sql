@@ -106,6 +106,7 @@ CREATE OR REPLACE PROCEDURE AddGratisBestellungZuKundenInGermany IS
     v_GermanyStateId NUMBER;
     v_FutterName VARCHAR2(40);
     v_BestellungId NUMBER;
+    v_BestellungCount NUMBER;
 BEGIN
     SELECT Id INTO v_GermanyStateId FROM Staat WHERE Name = 'Germany';
     BEGIN
@@ -119,7 +120,8 @@ BEGIN
 
     FOR r IN (SELECT Id FROM Kunde WHERE Staat_Id = v_GermanyStateId) LOOP
         INSERT INTO Bestellung (Kunde_Id, Filiale_Id) VALUES (r.Id, 1);
-        INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (14,v_FutterName);/*14 ersetzen mit der id der bestellung in der Zeile darüber*/
+        SELECT COUNT(b.id) INTO v_BestellungCount FROM BESTELLUNG;
+        INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (v_BestellungCount,v_FutterName);
     END LOOP;
     DBMS_OUTPUT.PUT_LINE('Gratis-Bestellungen wurden hinzugefügt.');
 END;
