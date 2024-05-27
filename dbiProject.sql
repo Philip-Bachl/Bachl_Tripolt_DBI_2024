@@ -80,7 +80,15 @@ BEGIN
     Mitarbeiter_Package.Durchschnittsgehalt();
 END;
 
+DECLARE
+    f_id NUMBER := 2;
+BEGIN
+    EntlasseMitarbeiterAusFiliale(f_id);
+END;
 
+BEGIN
+    MitarbeiterDieAuchKundenSind();
+END;
 
 
 CREATE OR REPLACE PACKAGE Filiale_Package AS
@@ -312,3 +320,8 @@ BEGIN
     logging_package.log_action(v_user, 'TIER_IST_IN_FILIALE');
 END;
 /
+
+--Test
+BEGIN
+    INSERT INTO Mitarbeiter (Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES ('Herman', 'Ruin', 50000, 10);
+END;
