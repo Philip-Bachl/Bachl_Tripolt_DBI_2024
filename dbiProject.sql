@@ -3,6 +3,7 @@ CREATE OR REPLACE PACKAGE Mitarbeiter_Package AS
     PROCEDURE ErhoeheGehalt(gehaltsgrenze NUMBER, erhoehung NUMBER);
     FUNCTION Durchschnittsgehalt RETURN NUMBER;
     PROCEDURE MitarbeiterDieAuchKundenSind;
+    PROCEDURE EntlasseMitarbeiterAusFiliale(f_id NUMBER);
 END Mitarbeiter_Package;
 /
 
@@ -49,8 +50,23 @@ CREATE OR REPLACE PACKAGE BODY Mitarbeiter_Package AS
         END LOOP;
     END;
 
+    CREATE OR REPLACE PROCEDURE EntlasseMitarbeiterAusFiliale(f_id NUMBER)
+    AS
+        v_manager_id NUMBER(38,0);
+        e_no_manager_found EXCEPTION;
     BEGIN
-        MitarbeiterDieAuchKundenSind();
+        SELECT m.id INTO v_manager_id 
+        FROM mitarbeiter m INNER JOIN FILIALE f ON m.id = f.manager_id 
+        WHERE f.id = f_id;
+        
+        UPDATE filiale f 
+        SET f.manager_id = null
+        WHERE f.id = f_id;
+        
+        DELETE FROM MITARBEITER m WHERE m.arbeitet_in_filiale_id = f_id;
+        
+        EXCEPTION WHEN no_data_found THEN
+            DELETE FROM MITARBEITER m WHERE m.arbeitet_in_filiale_id = f_id;
     END;
 
 END Mitarbeiter_Package;
