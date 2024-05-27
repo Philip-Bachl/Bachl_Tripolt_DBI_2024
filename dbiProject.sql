@@ -19,9 +19,9 @@ CREATE OR REPLACE PACKAGE BODY Mitarbeiter_Package AS
     UPDATE Mitarbeiter
     SET Gehalt = BerechneNeuesGehalt(Gehalt, erhoehung)
     WHERE Gehalt < gehaltsgrenze;
-	   	IF SQL%NOTFOUND THEN
-			RAISE e_no_raise; 
-		END IF;
+	   	IF SQL%ROWCOUNT = 0 THEN
+        RAISE e_no_raise; 
+    	END IF;
 	
 	EXCEPTION
 	WHEN e_no_raise THEN
@@ -34,7 +34,7 @@ CREATE OR REPLACE PACKAGE BODY Mitarbeiter_Package AS
           return v_durchschnitt;
     END;
 
-    CREATE OR REPLACE PROCEDURE MitarbeiterDieAuchKundenSind
+    MitarbeiterDieAuchKundenSind
     AS
         CURSOR c_mitarbeiter IS SELECT * FROM MITARBEITER;
         CURSOR c_kunden IS SELECT * FROM KUNDE;
@@ -157,7 +157,7 @@ BEGIN
         SELECT Name INTO v_FutterName FROM Futter WHERE Name = 'Dog Food';
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE('Futter "Dog Food" does not exist.');
+            DBMS_OUTPUT.PUT_LINE('Futter Dog Food does not exist.');
             RETURN;
     END;
 
@@ -167,7 +167,7 @@ BEGIN
         SELECT max(b.id) INTO v_BestellungCount FROM BESTELLUNG;
         INSERT INTO Bestellung_hat_Futter (Bestellung_Id, Futter_Name) VALUES (v_BestellungCount,v_FutterName);
     END LOOP;
-    DBMS_OUTPUT.PUT_LINE('Gratis-Bestellungen wurden hinzugefügt.');
+    DBMS_OUTPUT.PUT_LINE('Gratis Bestellungen wurden hinzugefügt.');
 END;
 
 --Test
@@ -325,3 +325,103 @@ END;
 BEGIN
     INSERT INTO Mitarbeiter (Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES ('Herman', 'Ruin', 50000, 10);
 END;
+
+CREATE OR REPLACE PROCEDURE ErhoeheFutterPreis AS
+BEGIN
+    UPDATE Futter
+    SET Preis_kg = 
+    CASE
+        WHEN Preis_kg < 2 THEN Preis_kg + 2
+        WHEN Preis_kg BETWEEN 2 AND 6 THEN Preis_kg + 1
+        ELSE Preis_kg + 3
+    END;
+END;
+
+--Test
+BEGIN
+    ErhoeheFutterPreis;
+END;
+
+
+
+
+CREATE OR REPLACE PROCEDURE getFilialenMitFutter (p_Futter_Name IN VARCHAR2)
+IS
+    CURSOR c_Futter IS
+        SELECT f.Id, f.Name, ff.Gewicht_Gramm
+        FROM Filiale f
+        JOIN Filiale_hat_Futter ff ON f.Id = ff.Filiale_Id
+        WHERE ff.Futter_Name = p_Futter_Name;
+BEGIN
+    FOR fil IN c_Futter LOOP
+        DBMS_OUTPUT.PUT_LINE('Filiale ID: ' || fil.Id || ' Filiale Name: ' || fil.Name || ' Verfügbare Menge in Gramm: ' || fil.Gewicht_Gramm);
+    END LOOP;
+END;
+
+
+--Test
+BEGIN
+    getFilialenMitFutter('Fish Flakes');
+END;
+
+
+CREATE OR REPLACE PROCEDURE fililialeWirdGeschlossen (p_OldFilialeId NUMBER , p_NewFilialeId NUMBER) IS
+BEGIN
+    UPDATE Bestellung
+    SET Filiale_Id = p_NewFilialeId
+    WHERE Filiale_Id = p_OldFilialeId;
+    DBMS_OUTPUT.PUT_LINE('Filial Id bei allen Bestellungen geändert.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Fehler beim Ändern der Filial ID in der Bestellung: ');
+END;
+
+--Test
+BEGIN
+    ChangeFilialeForBestellungen(1,2);
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE AddVorwahlToTelefonnummer(vorwahl VARCHAR2, kunden_id NUMBER) AS
+BEGIN
+    UPDATE Kunde k
+    SET k.TELEFONNUMMER = CONCAT(vorwahl, k.Telefonnummer)
+   	WHERE  k.ID = kunden_id;
+END;
+
+--Test
+BEGIN
+    AddVorwahlToTelefonnummer('+43', 1);
+END;
+
+
+CREATE OR REPLACE PROCEDURE CalculateAverageFutterPrice AS
+avg_price NUMBER;
+BEGIN
+    SELECT AVG(Preis_kg) INTO avg_price
+    FROM Futter;
+   	DBMS_OUTPUT.PUT_LINE(avg_price);
+END;
+--Test
+BEGIN
+    CalculateAverageFutterPrice;
+END;
+
+
+
+--Trigger 
+
+CREATE OR REPLACE TRIGGER no_gmx
+BEFORE INSERT ON Kunde
+FOR EACH ROW
+BEGIN
+    IF REGEXP_LIKE(:NEW.Email, 'gmx', 'i') THEN
+        RAISE_APPLICATION_ERROR(-20001, 'gmx is not allowed on this site');
+    END IF;
+END;
+
+
+--Test
+INSERT INTO Kunde (Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort)
+VALUES ('Max', 'Mustermann', '0123456789', 'test@gmx.com', 'Musterstraße 1', 1, 10115, 'Berlin');
