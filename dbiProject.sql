@@ -215,6 +215,8 @@ BEGIN
     END IF;
 END;
 
+--Logging_Package
+
 CREATE OR REPLACE PACKAGE logging_package AS
     PROCEDURE log_action(culprit VARCHAR2, changed_table VARCHAR);
 END logging_package;
@@ -222,7 +224,6 @@ END logging_package;
 
 ----
 
---Logging_Package
 CREATE OR REPLACE PACKAGE BODY logging_package AS
     PROCEDURE log_action(culprit VARCHAR2, changed_table VARCHAR)
     AS
@@ -361,5 +362,174 @@ BEGIN
     SELECT USER INTO v_user FROM dual;
 
     logging_package.log_action(v_user, 'TIER_IST_IN_FILIALE');
+END;
+/
+
+
+
+
+--Tests
+CREATE OR REPLACE PACKAGE Test_Package AS
+    -- Tests für Mitarbeiter_Package
+    PROCEDURE Test_ErhoeheGehalt;
+    PROCEDURE Test_Durchschnittsgehalt;
+    PROCEDURE Test_MitarbeiterDieAuchKundenSind;
+    PROCEDURE Test_EntlasseMitarbeiterAusFiliale;
+
+    -- Tests für Filiale_Package
+    PROCEDURE Test_GetFilialenMitTier;
+    PROCEDURE Test_GetMitarbeiterInFilialeWennGehaltGroesserAls;
+    PROCEDURE Test_getFilialenMitFutter;
+    PROCEDURE Test_fililialeWirdGeschlossen;
+
+    -- Tests für Kunden_Package
+    PROCEDURE Test_AddGratisBestellungZuKundenInGermany;
+    PROCEDURE Test_AddVorwahlToTelefonnummer;
+
+    -- Tests für Futter_Package
+    PROCEDURE Test_ErhoeheFutterPreis;
+    PROCEDURE Test_CalculateAverageFutterPrice;
+
+    -- Tests für Trigger
+    PROCEDURE Test_Trigger_No_Gmx;
+
+
+    -- Tests für Logging
+    PROCEDURE Test_Logging_LogAction;
+    PROCEDURE Test_Logging_InsertMitarbeiter;
+END Test_Package;
+/
+
+CREATE OR REPLACE PACKAGE BODY Test_Package AS
+
+    -- Tests for Mitarbeiter_Package
+
+    PROCEDURE Test_ErhoeheGehalt IS
+        gehalt NUMBER := 50000; 
+        erhoehung NUMBER := 5000; 
+    BEGIN
+        Mitarbeiter_Package.ErhoeheGehalt(gehalt, erhoehung);
+    END;
+
+    PROCEDURE Test_Durchschnittsgehalt IS
+        avg_gehalt NUMBER;
+    BEGIN
+        avg_gehalt := Mitarbeiter_Package.Durchschnittsgehalt;
+        DBMS_OUTPUT.PUT_LINE('Durchschnittsgehalt: ' || avg_gehalt);
+    END;
+
+    PROCEDURE Test_MitarbeiterDieAuchKundenSind IS
+    BEGIN
+        Mitarbeiter_Package.MitarbeiterDieAuchKundenSind;
+    END;
+
+    PROCEDURE Test_EntlasseMitarbeiterAusFiliale IS
+        f_id NUMBER := 2;
+    BEGIN
+        Mitarbeiter_Package.EntlasseMitarbeiterAusFiliale(f_id);
+    END;
+
+    -- Tests for Filiale_Package
+
+    PROCEDURE Test_GetFilialenMitTier IS
+        v_Tier_Name VARCHAR2(40) := 'Cat'; 
+    BEGIN
+        Filiale_Package.GetFilialenMitTier(v_Tier_Name);
+    END;
+
+    PROCEDURE Test_GetMitarbeiterInFilialeWennGehaltGroesserAls IS
+        v_Filiale_Id NUMBER := 1; 
+        v_mindest_Gehalt NUMBER := 50000;
+    BEGIN
+        Filiale_Package.GetMitarbeiterInFilialeWennGehaltGroesserAls(v_Filiale_Id, v_mindest_Gehalt);
+    END;
+
+    PROCEDURE Test_getFilialenMitFutter IS
+    BEGIN
+        Filiale_Package.getFilialenMitFutter('Fish Flakes');
+    END;
+
+    PROCEDURE Test_fililialeWirdGeschlossen IS
+    BEGIN
+        Filiale_Package.fililialeWirdGeschlossen(1, 2);
+    END;
+
+    -- Tests for Kunden_Package
+
+    PROCEDURE Test_AddGratisBestellungZuKundenInGermany IS
+    BEGIN
+        Kunden_Package.AddGratisBestellungZuKundenInGermany;
+    END;
+
+    PROCEDURE Test_AddVorwahlToTelefonnummer IS
+    BEGIN
+        Kunden_Package.AddVorwahlToTelefonnummer('+43', 1);
+    END;
+
+    -- Tests for Futter_Package
+
+    PROCEDURE Test_ErhoeheFutterPreis IS
+    BEGIN
+        Futter_Package.ErhoeheFutterPreis;
+    END;
+
+    PROCEDURE Test_CalculateAverageFutterPrice IS
+    BEGIN
+        Futter_Package.CalculateAverageFutterPrice;
+    END;
+
+    -- Tests for Trigger
+
+    PROCEDURE Test_Trigger_No_Gmx IS
+    BEGIN
+        INSERT INTO Kunde 
+        (Vorname, Nachname, Telefonnummer, Email, StraßeUndHausnummer, Staat_Id, Ort_PLZ, Ort_Ort)
+        VALUES 
+        ('Max', 'Mustermann', '0123456789', 'test@gmx.com', 'Musterstraße 1', 1, 10115, 'Berlin');
+    END;
+ 
+
+    -- Tests for Logging
+
+    PROCEDURE Test_Logging_LogAction IS
+        v_culprit VARCHAR2(30) := 'Max-Mustermann';
+        v_changed_table VARCHAR2(30) := 'MusterTable';
+    BEGIN
+        logging_package.log_action(v_culprit, v_changed_table);
+    END;
+
+    PROCEDURE Test_Logging_InsertMitarbeiter IS
+    BEGIN
+        INSERT INTO Mitarbeiter (Vorname, Nachname, Gehalt, Arbeitet_in_Filiale_Id) VALUES ('Herman', 'Ruin', 50000, 10);
+    END;
+
+END Test_Package;
+/
+
+
+
+
+--Testpaket Testen
+BEGIN
+    Test_Package.Test_ErhoeheGehalt;
+    Test_Package.Test_Durchschnittsgehalt;
+    Test_Package.Test_MitarbeiterDieAuchKundenSind;
+    Test_Package.Test_EntlasseMitarbeiterAusFiliale;
+
+    Test_Package.Test_GetFilialenMitTier;
+    Test_Package.Test_GetMitarbeiterInFilialeWennGehaltGroesserAls;
+    Test_Package.Test_getFilialenMitFutter;
+    Test_Package.Test_fililialeWirdGeschlossen;
+
+    Test_Package.Test_AddGratisBestellungZuKundenInGermany;
+    Test_Package.Test_AddVorwahlToTelefonnummer;
+
+    Test_Package.Test_ErhoeheFutterPreis;
+    Test_Package.Test_CalculateAverageFutterPrice;
+
+    Test_Package.Test_Trigger_InsertKunde;
+
+    Test_Package.Test_Logging_LogAction;
+    Test_Package.Test_Logging_InsertMitarbeiter;
 END;
 /
