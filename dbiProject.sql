@@ -562,6 +562,8 @@ BEGIN
     Test_Package.Test_ErhoeheFutterPreis;
     Test_Package.Test_CalculateAverageFutterPrice;
 
+    Test_Package.Test_Trigger_No_Gmx;
+
     Test_Package.Test_Logging_LogAction;
     Test_Package.Test_Logging_InsertMitarbeiter;
 END;
