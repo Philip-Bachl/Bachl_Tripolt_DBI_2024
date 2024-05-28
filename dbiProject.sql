@@ -402,7 +402,7 @@ END Test_Package;
 
 CREATE OR REPLACE PACKAGE BODY Test_Package AS
 
-    -- Tests for Mitarbeiter_Package
+    -- Tests für Mitarbeiter_Package
 
     PROCEDURE Test_ErhoeheGehalt IS
         gehalt NUMBER := 50000; 
@@ -429,7 +429,7 @@ CREATE OR REPLACE PACKAGE BODY Test_Package AS
         Mitarbeiter_Package.EntlasseMitarbeiterAusFiliale(f_id);
     END;
 
-    -- Tests for Filiale_Package
+    -- Tests für Filiale_Package
 
     PROCEDURE Test_GetFilialenMitTier IS
         v_Tier_Name VARCHAR2(40) := 'Cat'; 
@@ -454,7 +454,7 @@ CREATE OR REPLACE PACKAGE BODY Test_Package AS
         Filiale_Package.fililialeWirdGeschlossen(1, 2);
     END;
 
-    -- Tests for Kunden_Package
+    -- Tests für Kunden_Package
 
     PROCEDURE Test_AddGratisBestellungZuKundenInGermany IS
     BEGIN
@@ -466,7 +466,7 @@ CREATE OR REPLACE PACKAGE BODY Test_Package AS
         Kunden_Package.AddVorwahlToTelefonnummer('+43', 1);
     END;
 
-    -- Tests for Futter_Package
+    -- Tests für Futter_Package
 
     PROCEDURE Test_ErhoeheFutterPreis IS
     BEGIN
@@ -478,7 +478,7 @@ CREATE OR REPLACE PACKAGE BODY Test_Package AS
         Futter_Package.CalculateAverageFutterPrice;
     END;
 
-    -- Tests for Trigger
+    -- Tests für Trigger
 
     PROCEDURE Test_Trigger_No_Gmx IS
     BEGIN
@@ -489,7 +489,7 @@ CREATE OR REPLACE PACKAGE BODY Test_Package AS
     END;
  
 
-    -- Tests for Logging
+    -- Tests für Logging
 
     PROCEDURE Test_Logging_LogAction IS
         v_culprit VARCHAR2(30) := 'Max-Mustermann';
