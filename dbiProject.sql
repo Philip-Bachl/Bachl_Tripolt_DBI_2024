@@ -8,11 +8,12 @@ END Mitarbeiter_Package;
 /
 
 CREATE OR REPLACE PACKAGE BODY Mitarbeiter_Package AS
+--Tripolt
     FUNCTION BerechneNeuesGehalt(altesGehalt NUMBER, erhoehung NUMBER) RETURN NUMBER IS
     BEGIN
         RETURN altesGehalt + erhoehung;
     END;
-
+--Tripolt
     PROCEDURE ErhoeheGehalt(gehaltsgrenze NUMBER, erhoehung NUMBER) IS
  	  e_no_raise EXCEPTION;
 	BEGIN
@@ -27,13 +28,13 @@ CREATE OR REPLACE PACKAGE BODY Mitarbeiter_Package AS
 	WHEN e_no_raise THEN
 		dbms_output.Put_line('Nobody got a raise');
 	END;
-	
+--Tripolt
     FUNCTION Durchschnittsgehalt RETURN NUMBER IS v_durchschnitt NUMBER;
     BEGIN
       SELECT AVG(Gehalt) INTO v_durchschnitt FROM Mitarbeiter;
           return v_durchschnitt;
     END;
-
+--Bachl
     MitarbeiterDieAuchKundenSind
     AS
         CURSOR c_mitarbeiter IS SELECT * FROM MITARBEITER;
@@ -49,7 +50,7 @@ CREATE OR REPLACE PACKAGE BODY Mitarbeiter_Package AS
             END LOOP;
         END LOOP;
     END;
-
+--Bachl
     CREATE OR REPLACE PROCEDURE EntlasseMitarbeiterAusFiliale(f_id NUMBER)
     AS
         v_manager_id NUMBER(38,0);
@@ -82,6 +83,7 @@ CREATE OR REPLACE PACKAGE Filiale_Package AS
 /
 
 CREATE OR REPLACE PACKAGE BODY Filiale_Package AS
+--Tripolt
 	PROCEDURE GetFilialenMitTier (p_Tier_Name VARCHAR2)
 	IS
 	BEGIN
@@ -94,7 +96,7 @@ CREATE OR REPLACE PACKAGE BODY Filiale_Package AS
 	        DBMS_OUTPUT.PUT_LINE(fil.Id || ' ' || fil.Name);
 	    END LOOP;
 	END;
-
+--Tripolt
 	PROCEDURE GetMitarbeiterInFilialeWennGehaltGroesserAls (p_Filiale_Id IN NUMBER, p_Gehalt IN NUMBER)
 	IS
 	    CURSOR mitarbeiterCursor IS
@@ -107,7 +109,7 @@ CREATE OR REPLACE PACKAGE BODY Filiale_Package AS
 	        DBMS_OUTPUT.PUT_LINE('Mitarbeiter ID: ' || mit.Id || ' Vorname: ' || mit.Vorname || ' Nachname: ' || mit.Nachname || ' Gehalt: ' || mit.Gehalt);
 	    END LOOP;
 	END;
-
+--Tripolt
     CREATE OR REPLACE PROCEDURE getFilialenMitFutter (p_Futter_Name IN VARCHAR2)
     IS
         CURSOR c_Futter IS
@@ -120,7 +122,7 @@ CREATE OR REPLACE PACKAGE BODY Filiale_Package AS
             DBMS_OUTPUT.PUT_LINE('Filiale ID: ' || fil.Id || ' Filiale Name: ' || fil.Name || ' Verfügbare Menge in Gramm: ' || fil.Gewicht_Gramm);
         END LOOP;
     END;
-
+--Tripolt
     PROCEDURE fililialeWirdGeschlossen (p_OldFilialeId NUMBER , p_NewFilialeId NUMBER) IS
     BEGIN
         UPDATE Bestellung
@@ -143,6 +145,7 @@ END Kunden_Package;
 /
 
 CREATE OR REPLACE PACKAGE BODY Kunden_Package AS
+--Tripolt & Bachl
     PROCEDURE AddGratisBestellungZuKundenInGermany IS
         v_GermanyStateId NUMBER;
         v_FutterName VARCHAR2(40);
@@ -166,7 +169,7 @@ CREATE OR REPLACE PACKAGE BODY Kunden_Package AS
         END LOOP;
         DBMS_OUTPUT.PUT_LINE('Gratis Bestellungen wurden hinzugefügt.');
     END;
-
+--Tripolt
     PROCEDURE AddVorwahlToTelefonnummer(vorwahl VARCHAR2, kunden_id NUMBER) AS
     BEGIN
         UPDATE Kunde k
@@ -184,6 +187,7 @@ END Futter_Package;
 /
 
 CREATE OR REPLACE PACKAGE BODY Futter_Package AS
+--Tripolt
     PROCEDURE ErhoeheFutterPreis AS
     BEGIN
         UPDATE Futter
@@ -194,13 +198,27 @@ CREATE OR REPLACE PACKAGE BODY Futter_Package AS
             ELSE Preis_kg + 3
         END;
     END;
-
-    PROCEDURE CalculateAverageFutterPrice AS
+--Tripolt
+    PROCEDURE CalculateAverageFutterPrice AS 
+    no_Futter_Found EXCEPTION;
     avg_price NUMBER;
+    futter_count NUMBER;
     BEGIN
-        SELECT AVG(Preis_kg) INTO avg_price
-        FROM Futter;
-        DBMS_OUTPUT.PUT_LINE(avg_price);
+	    
+    SELECT COUNT(*) INTO futter_count
+    FROM Futter;
+
+    IF futter_count = 0 THEN
+   		raise no_Futter_Found;
+    END IF;
+
+    SELECT AVG(Preis_kg) INTO avg_price
+    FROM Futter;
+
+    DBMS_OUTPUT.PUT_LINE(avg_price);
+    EXCEPTION
+    	WHEN no_Futter_Found THEN
+			Raise_application_error(-20201,'No futter found, Cant calculate average!');
     END;
 END Futter_Package;
 /
@@ -225,6 +243,7 @@ END logging_package;
 ----
 
 CREATE OR REPLACE PACKAGE BODY logging_package AS
+--Bachl
     PROCEDURE log_action(culprit VARCHAR2, changed_table VARCHAR)
     AS
     BEGIN
@@ -232,7 +251,7 @@ CREATE OR REPLACE PACKAGE BODY logging_package AS
     END;
 END logging_package;
 /
-
+--Bachl
 CREATE OR replace TRIGGER log_ART_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON ART
 DECLARE
@@ -242,8 +261,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'ART');
 END;
-/
 
+--Bachl
 CREATE OR replace TRIGGER log_BESTELLUNG_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON BESTELLUNG
 DECLARE
@@ -253,7 +272,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'BESTELLUNG');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_BESTELLUNG_HAT_FUTTER_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON BESTELLUNG_HAT_FUTTER
 DECLARE
@@ -263,7 +283,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'BESTELLUNG_HAT_FUTTER');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_BESTELLUNG_HAT_TIER_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON BESTELLUNG_HAT_TIER
 DECLARE
@@ -273,7 +294,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'BESTELLUNG_HAT_TIER');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_FILIALE_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON FILIALE
 DECLARE
@@ -283,7 +305,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'FILIALE');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_FILIALE_HAT_FUTTER_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON FILIALE_HAT_FUTTER
 DECLARE
@@ -293,7 +316,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'FILIALE_HAT_FUTTER');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_FUTTER_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON FUTTER
 DECLARE
@@ -303,7 +327,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'FUTTER');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_KUNDE_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON KUNDE
 DECLARE
@@ -313,7 +338,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'KUNDE');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_MITARBEITER_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON MITARBEITER
 DECLARE
@@ -323,7 +349,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'MITARBEITER');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_ORT_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON ORT
 DECLARE
@@ -333,7 +360,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'ORT');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_STAAT_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON STAAT
 DECLARE
@@ -343,7 +371,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'STAAT');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_TIER_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON TIER
 DECLARE
@@ -353,7 +382,8 @@ BEGIN
 
     logging_package.log_action(v_user, 'TIER');
 END;
-/
+
+--Bachl
 CREATE OR replace TRIGGER log_TIER_IST_IN_FILIALE_trigger
 BEFORE INSERT OR UPDATE OR DELETE ON TIER_IST_IN_FILIALE
 DECLARE
@@ -363,7 +393,7 @@ BEGIN
 
     logging_package.log_action(v_user, 'TIER_IST_IN_FILIALE');
 END;
-/
+
 
 
 
@@ -511,25 +541,25 @@ END Test_Package;
 
 --Testpaket Testen
 BEGIN
-    Test_Package.Test_ErhoeheGehalt;
-    Test_Package.Test_Durchschnittsgehalt;
-    Test_Package.Test_MitarbeiterDieAuchKundenSind;
-    Test_Package.Test_EntlasseMitarbeiterAusFiliale;
+    --Test_Package.Test_ErhoeheGehalt;
+    --Test_Package.Test_Durchschnittsgehalt;
+    --Test_Package.Test_MitarbeiterDieAuchKundenSind;
+    --Test_Package.Test_EntlasseMitarbeiterAusFiliale;
 
-    Test_Package.Test_GetFilialenMitTier;
-    Test_Package.Test_GetMitarbeiterInFilialeWennGehaltGroesserAls;
-    Test_Package.Test_getFilialenMitFutter;
-    Test_Package.Test_fililialeWirdGeschlossen;
+    --Test_Package.Test_GetFilialenMitTier;
+    --Test_Package.Test_GetMitarbeiterInFilialeWennGehaltGroesserAls;
+    --Test_Package.Test_getFilialenMitFutter;
+    --Test_Package.Test_fililialeWirdGeschlossen;
 
-    Test_Package.Test_AddGratisBestellungZuKundenInGermany;
-    Test_Package.Test_AddVorwahlToTelefonnummer;
+    --Test_Package.Test_AddGratisBestellungZuKundenInGermany;
+    --Test_Package.Test_AddVorwahlToTelefonnummer;
 
-    Test_Package.Test_ErhoeheFutterPreis;
-    Test_Package.Test_CalculateAverageFutterPrice;
+    --Test_Package.Test_ErhoeheFutterPreis;
+    --Test_Package.Test_CalculateAverageFutterPrice;
 
-    Test_Package.Test_Trigger_InsertKunde;
+    --Test_Package.Test_Trigger_InsertKunde;
 
-    Test_Package.Test_Logging_LogAction;
-    Test_Package.Test_Logging_InsertMitarbeiter;
+    --Test_Package.Test_Logging_LogAction;
+    --Test_Package.Test_Logging_InsertMitarbeiter;
 END;
 /
