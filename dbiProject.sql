@@ -224,6 +224,7 @@ END Futter_Package;
 /
 
 --Trigger 
+--Tripolt
 CREATE OR REPLACE TRIGGER no_gmx
 BEFORE INSERT ON Kunde
 FOR EACH ROW
